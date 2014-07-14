@@ -3,13 +3,26 @@ require 'rails_helper'
 RSpec.describe OrdersController, :type => :controller do
 
   describe 'POST' do
-    context 'create order' do
-      before {
-        post :create, user_id: 1
-      }
+    context 'with exist user' do
+      let!(:kayla) { User.create(name: "kayla")}
+      before do
+        expect(User).to receive(:find).with(kayla.id).and_return(kayla)
+      end
 
-      it 'return 201' do
-        expect(response).to have_http_status(201)
+
+      context 'create order' do
+        before {
+          expect_any_instance_of(Order).to receive(:save).and_call_original
+          post :create, user_id: kayla.id, order: {name: "sofia"}
+        }
+
+        it 'return 201' do
+          expect(response).to have_http_status(201)
+        end
+
+        it 'return uri of the created order' do
+          expect(response.header["Location"]).to match(%r{/users/#{kayla.id}/orders/.*{25}})
+        end
       end
     end
   end
