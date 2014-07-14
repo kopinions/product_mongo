@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'dotenv-rails'
 gem 'mongoid', '~> 4.0.0'
 gem 'bson_ext'
 gem 'therubyracer'
