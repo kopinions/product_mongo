@@ -3,7 +3,8 @@ source 'https://rubygems.org'
 
 gem 'mongoid', '~> 4.0.0'
 gem 'bson_ext'
-
+gem 'therubyracer'
+gem 'execjs'
 gem "rspec-rails", :group => [:development, :test]
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
