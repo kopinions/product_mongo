@@ -19,7 +19,7 @@ RSpec.describe ProductsController, :type => :controller do
     context 'create product' do
       before {
         expect(Product).to receive(:new).with({name: 'apple'}).and_call_original
-        post :create, product: {name: 'apple'}
+        post :create, product: {name: 'apple', price: {amount: 100}}
       }
 
       it 'return 201' do

@@ -5,8 +5,9 @@ class ProductsController < ApplicationController
 
   def create
     product = Product.new(params.require(:product).permit(:name))
+    price = Price.new(params.require(:product).permit(price: [:amount])[:price])
+    product.price = price
     product.save()
-    puts product.inspect
     response.location = product_path product
     head 201
   end
